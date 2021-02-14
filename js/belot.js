@@ -51,14 +51,19 @@ for (const label of labels) {
     }
 }
 
-deck = shuffle(deck);
+//deck = deal_second(deck);
+//
+//
+//start_new_hand(0);
 
-deck = deal_first(deck);
-deck = deal_second(deck);
+start_next_round();
 
-update_ui();
+function start_next_round() {
+    deck = shuffle(deck);
+    deck = deal_first(deck);
 
-start_new_hand(0);
+    update_ui();
+}
 
 
 function shuffle(deck) {
@@ -109,6 +114,7 @@ function deal_second (deck) {
 function update_ui () {
     for (let i = 0; i < players_count; i++) {
         for (let j = 0; j < max_cards_in_hand; j++) {
+            if (!player_hands[i][j]) { break; }
             document.getElementById("i" + i + "c" + j).src = "Cards/" + player_hands[i][j].label + player_hands[i][j].suit + ".png";
         }
     }
